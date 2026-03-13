@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'nutritionix' => [
+        'app_id'  => env('NUTRITIONIX_APP_ID'),
+        'app_key' => env('NUTRITIONIX_APP_KEY'),
+    ],
+
 ];
