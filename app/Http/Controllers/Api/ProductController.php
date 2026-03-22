@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function scan(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'barcode'    => ['required', 'string', 'max:30'],
+            'barcode'    => ['required', 'string', 'max:50'],
             'profile_id' => ['nullable', 'integer', 'exists:profiles,id'],
         ]);
 
