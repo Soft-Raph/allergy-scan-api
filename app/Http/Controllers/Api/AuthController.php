@@ -67,6 +67,19 @@ class AuthController extends Controller
 
     public function me(Request $request): JsonResponse
     {
-        return success_response(new UserResource($request->user()));
+        $user = $request->user();
+
+        $totalScans         = $user->scanLogs()->count();
+        $totalAlertsFound   = $user->scanLogs()->whereRaw("JSON_LENGTH(triggered_allergens) > 0")->count();
+        $totalProfilesAdded = $user->profiles()->count();
+
+        return success_response([
+            'user'  => new UserResource($user),
+            'stats' => [
+                'total_scans'          => $totalScans,
+                'total_alerts_found'   => $totalAlertsFound,
+                'total_profiles_added' => $totalProfilesAdded,
+            ],
+        ]);
     }
 }
